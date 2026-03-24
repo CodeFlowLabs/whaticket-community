@@ -125,11 +125,10 @@ const prepareLocation = (msg: WbotMessage): WbotMessage => {
   const gmapsUrl = `https://maps.google.com/maps?q=${location.latitude}%2C${location.longitude}&z=17&hl=pt-BR`;
 
   msg.body = `data:image/png;base64,${msg.body}|${gmapsUrl}`;
-  msg.body += `|${
-    location.description
+  msg.body += `|${location.description
       ? location.description
       : `${location.latitude}, ${location.longitude}`
-  }`;
+    }`;
 
   return msg;
 };
@@ -322,10 +321,10 @@ const sendMessage = async (
 
   const quotedMsgSerializedId = options?.quotedMessageId
     ? getSerializedMessageId(
-        to,
-        Boolean(options?.quotedMessageFromMe),
-        options?.quotedMessageId
-      )
+      to,
+      Boolean(options?.quotedMessageFromMe),
+      options?.quotedMessageId
+    )
     : "";
 
   const sentMessage = await wbot.sendMessage(to, body, {
@@ -347,10 +346,10 @@ const sendMedia = async (
   const messageMedia = media.path
     ? MessageMedia.fromFilePath(media.path)
     : new MessageMedia(
-        media.mimetype,
-        media.data?.toString("base64") || "",
-        media.filename
-      );
+      media.mimetype,
+      media.data?.toString("base64") || "",
+      media.filename
+    );
 
   const mediaOptions: MessageSendOptions = {
     caption: options?.caption,
@@ -451,7 +450,6 @@ const init = async (whatsapp: Whatsapp): Promise<void> => {
     const args: string = process.env.CHROME_ARGS || "";
 
     const wbot: Session = new Client({
-      session: sessionCfg,
       authStrategy: new LocalAuth({ clientId: `bd_${whatsapp.id}` }),
       puppeteer: {
         // headless: false, // TODO make sure chromium closes on session disconnection / delete
