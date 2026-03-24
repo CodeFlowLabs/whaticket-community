@@ -8,6 +8,7 @@ function getConfig(name, defaultValue = null) {
 }
 
 export function getBackendUrl() {
+  console.log(getConfig("VITE_BACKEND_URL"));
   return getConfig("VITE_BACKEND_URL");
 }
 
